@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -26,10 +27,17 @@ namespace ListData
             InitializeComponent();
             string basURI = "https://webservice.casvpn.com/serverlist.php";
             WebRequest request = WebRequest.Create(basURI);
-            request.Method = "POST";
+            request.Method = "GET";
             HttpWebResponse response = null;
             response = (HttpWebResponse)request.GetResponse();
-            string strresulttest = "";
+            string strresulttest = null;
+
+            using(Stream stream= response.GetResponseStream())
+            {
+                StreamReader read = new StreamReader(stream);
+                strresulttest = read.ReadToEnd();
+                read.Close();
+            }
 
 
 
