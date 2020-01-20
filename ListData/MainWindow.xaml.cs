@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,17 @@ namespace ListData
         public MainWindow()
         {
             InitializeComponent();
+            string basURI = "https://webservice.casvpn.com/serverlist.php";
+            WebRequest request = WebRequest.Create(basURI);
+            request.Method = "POST";
+            HttpWebResponse response = null;
+            response = (HttpWebResponse)request.GetResponse();
+            string strresulttest = "";
+
+
+
+
+
         }
     }
 }
