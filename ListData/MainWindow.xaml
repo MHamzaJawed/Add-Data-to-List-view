@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListData"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="305">
     <Grid>
 
+        <ListView x:Name="serverLIst">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="seerver Id"/>
+                    <GridViewColumn Header="Country"/>
+                    <GridViewColumn Header="City"/>
+                    <GridViewColumn Header="DNS"/>
+                    <GridViewColumn Header="Ping Rate"/>
+                    
+                </GridView>
+            </ListView.View>
+            
+            
+            
+        </ListView>
+        
+        
+        
     </Grid>
 </Window>
