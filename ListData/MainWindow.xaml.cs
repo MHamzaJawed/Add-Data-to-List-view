@@ -14,6 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Web;
+using CASVPN.Model;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace ListData
 {
@@ -25,24 +29,22 @@ namespace ListData
         public MainWindow()
         {
             InitializeComponent();
-            string basURI = "https://webservice.casvpn.com/serverlist.php";
-            WebRequest request = WebRequest.Create(basURI);
-            request.Method = "GET";
-            HttpWebResponse response = null;
-            response = (HttpWebResponse)request.GetResponse();
-            string strresulttest = null;
-
-            using(Stream stream= response.GetResponseStream())
-            {
-                StreamReader read = new StreamReader(stream);
-                strresulttest = read.ReadToEnd();
-                read.Close();
-            }
-
-
-
-
-
+            httpRequest();
         }
+       private void httpRequest()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://webservice.casvpn.com/serverlist.php");
+            HttpResponseMessage response = client.GetAsync("").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var obj = JsonSerializer.Deserialize<ServerModel>(result);
+            }
+        }
+
+
+
+
     }
 }
